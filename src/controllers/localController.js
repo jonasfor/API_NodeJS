@@ -1,11 +1,11 @@
 const express = require('express');
-const estacao = require('../models/estacao');
+const local = require('../models/local');
 const router = express.Router();
 
-router.post('/station', async (req, res) => {
+router.post('/premises', async (req, res) => {
   try {
-    const est = await res.json({estacao: req.body });
-    return est;
+    const loc = await res.json({local: req.body });
+    return loc;
 
   }catch(err){
 
