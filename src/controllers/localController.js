@@ -2,11 +2,28 @@ const express = require('express');
 const local = require('../models/local');
 const router = express.Router();
 
-router.post('/premises', async (req, res) => {
+router.post('/premises',(req, res) => {
   try {
-    const loc = await res.json({local: req.body });
-    return loc;
+    var data = new local(req.body)
+    
+    data.save()
+    const loc =  res.json(data) 
+    
+  }catch(err){
 
+    return res.status(400).send({ error: "Registration failed" });
+
+  }
+});
+
+
+router.get('/premises',(req, res) => {
+  try {
+    local.find((err, obj) => {
+      
+      const loc =  res.json({entries: obj}) 
+      
+    })
   }catch(err){
 
     return res.status(400).send({ error: "Registration failed" });

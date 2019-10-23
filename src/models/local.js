@@ -1,26 +1,20 @@
-const mongoose = require('../database');
+const mongoose = require('../database/index');
 
 const localSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    autoIncrement: true,
-    primaryKey: true,
-    unique: true,
-    require: true,
-    select: false,
-
-  },
 
   name: {
     type: String,
-    require: true,
+    require: true, 
   },
 
   address:{
     type: String,
     require: true,
   },
+  
 });
 
-const local = mongoose.model('local', localSchema);
+
+
+const local = mongoose.model('Local', localSchema, 'locals');
 module.exports = local;
