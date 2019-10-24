@@ -1,20 +1,29 @@
 const express = require('express');
 const station = require('../models/station');
+const local = require('../models/local');
 const router = express.Router();
 
 router.post('/station',(req, res) => {
   try {
     var data = new station(req.body)
     station.findOne({"name" :  req.body.name}, {_id: false, name: true}, (err, obj) => {
+      
       if(obj){
         return res.status(409).send({ error: "station already exist" });
       }
-      if(!obj){
-        data.save()
-        const sta =  res.json(data) 
+      else{  
+        local.findOne({"_id" : req.body.premise_id}, (err, obj) => {
+          
+          if(obj){  
+            data.save()
+            const sta =  res.json(data) 
+          }
+          else{
+            return res.status(409).send({ error: "Local id does not exist" });
+          }
+        })  
       }     
-    })
-       
+    })    
   }catch(err){
 
     return res.status(400).send({ error: "Registration failed" });
