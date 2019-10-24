@@ -6,6 +6,10 @@ const router = express.Router();
 router.post('/station',(req, res) => {
   try {
     var data = new station(req.body)
+    data._id = req.body.serial
+
+    
+
     station.findOne({"serial" :  req.body.serial}, {_id: false, name: true}, (err, obj) => {
       
       if(obj){
@@ -35,7 +39,7 @@ router.post('/station',(req, res) => {
 router.get('/premises/:premise_id/station',(req, res) => {
   try {    
     station.find({ "premise_id" : req.params.premise_id }, (err, obj) => {
-      if(!obj) {
+      if(obj.length == 0) {
         return res.send({ error: "Local not found" });
       }
       else {
