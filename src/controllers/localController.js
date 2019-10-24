@@ -5,10 +5,16 @@ const router = express.Router();
 router.post('/premises',(req, res) => {
   try {
     var data = new local(req.body)
-    
-    data.save()
-    const loc =  res.json(data) 
-    
+    local.findOne({"name" :  req.body.name}, {_id: false, name: true}, (err, obj) => {
+      if(obj){
+        return res.status(409).send({ error: "Local already exist" });
+      }
+      if(!obj){
+        data.save()
+        const loc =  res.json(data) 
+      }     
+    })
+       
   }catch(err){
 
     return res.status(400).send({ error: "Registration failed" });
