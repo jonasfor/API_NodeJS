@@ -6,10 +6,10 @@ const router = express.Router();
 router.post('/station',(req, res) => {
   try {
     var data = new station(req.body)
-    station.findOne({"name" :  req.body.name}, {_id: false, name: true}, (err, obj) => {
+    station.findOne({"serial" :  req.body.serial}, {_id: false, name: true}, (err, obj) => {
       
       if(obj){
-        return res.status(409).send({ error: "station already exist" });
+        return res.send({ error: "station already exist" });
       }
       else{  
         local.findOne({"_id" : req.body.premise_id}, (err, obj) => {
@@ -19,7 +19,7 @@ router.post('/station',(req, res) => {
             const sta =  res.json(data) 
           }
           else{
-            return res.status(409).send({ error: "Local id does not exist" });
+            return res.send({ error: "Local id does not exist" });
           }
         })  
       }     
@@ -32,11 +32,16 @@ router.post('/station',(req, res) => {
 });
 
 
-router.get('/station',(req, res) => {
-  try {
-    station.find((err, obj) => {
-      
-      const loc =  res.json({entries: obj}) 
+router.get('/premises/:premise_id/station',(req, res) => {
+  try {    
+    station.find({ "premise_id" : req.params.premise_id }, (err, obj) => {
+      if(!obj) {
+        return res.send({ error: "Local not found" });
+      }
+      else {
+        const loc =  res.json({entries: obj}) 
+      }
+
       
     })
   }catch(err){

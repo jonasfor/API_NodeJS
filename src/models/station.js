@@ -7,8 +7,10 @@ const stationSchema = new mongoose.Schema({
     require: true, 
   },
   premise_id:{
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Local',
     require: true,
+   
   },
   name:{
     type: String,
