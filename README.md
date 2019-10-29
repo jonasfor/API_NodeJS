@@ -3,7 +3,7 @@ Está disponível nesse repositório uma API desenvolvida em Node.js e banco de 
 
 
 ## Instalação
-* Para que o a API funcione é necessario a instalação do **Node.js** na versão 10.0 ou superior e
+* Para que a API funcione é necessario a instalação do **Node.js** na versão 10.0 ou superior e
   para efetuar o download do node para qualquer sistema operacional [Clique aqui](https://nodejs.org/en/download/)
 
 * É necessario também **Clonar** ou realizar o **Download ZIP** desse repositório.
