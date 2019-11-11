@@ -1,4 +1,4 @@
-# API_Rentbrella
+# API_NODEJS
 Está disponível nesse repositório uma API desenvolvida em Node.js e banco de dados MongoDB que exerce as funções de cadastro e consulta dos locais e stações da RentBrella 
 
 
